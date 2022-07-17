@@ -4,7 +4,7 @@ module tb ;
     byte signed_vec = 8'b1000_0000;
 initial begin
     $display("1ogie_vec = %d", logic_vec);
-    $display("bit_vee=%d", bit_vec);
+    $display("bit_vec=%d", bit_vec);
     $display("signed_vec = %d", signed_vec);
 end
 endmodule

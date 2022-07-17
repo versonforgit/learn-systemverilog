@@ -17,3 +17,35 @@
 * 推出 logic 类型的另一个原因是方便验证人员驱动和连接硬件模块而省去考虑使用reg 还是使用 wire 的精力。这既节省了时间，也避免了出错的可能。与logic 类型对应的数据类型是 bit 类型，它们均可用来构建矢量类型（vector)，区别在于：
     * logic 为四值逻辑，即可以表示 0、1、X、Z。
     * bit 为二值逻辑，只可以表示0和1。
+通过 logic 和 bit 声明的矢量均为无符号 (unsigned） 变量，例如：
+```systemverilog
+module tb ;
+    logic [7:0]  logic_vec = 8'b1000_0000;
+    bit [7:0] bit_vec=8'b1000_0000;
+    byte signed_vec = 8'b1000_0000;
+initial begin
+    $display("1ogie_vec = %d", logic_vec);
+    $display("bit_vec = %d", bit_vec);
+    $display("signed_vec = %d", signed_vec);
+end
+endmodule
+```
+仿真结果：
+```shell
+logic_vec = 128
+bit_vec =128
+signed_vec = -128
+```
+如果按照有符号和无符号的类型划分，那么可以将常见的变量类型划分为：
+* 有符号类型：byte、 shortint、 int、 longint、 integer。
+* 无符号类型：bit、 logic、 reg、 net-type（如 wire、 tri)。
+避免两种不一致的变量进行操作，运算结果会出乎意料：
+```systemverilog
+bit [8:01 result_vec;
+initial begin
+result_vec = signed_vec;
+$display("@1 result vec = 'h%x"， result_vec);
+result_ve c= unsigned'(signed_vec);
+$display("@2 result_vec = 'h%x"， result_vec);
+end
+
