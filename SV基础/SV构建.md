@@ -1,7 +1,4 @@
-
-
 # SV环境构建
-
 ### 优点
 1. 抽象的数据结构描述 满足 更高层面的验证需求。
 2. 面向对象的编程方式 更好的模块性、封装性和复用性。
@@ -20,7 +17,7 @@
 * 推出 logic 类型的另一个原因是方便验证人员驱动和连接硬件模块而省去考虑使用reg 还是使用 wire 的精力。这既节省了时间，也避免了出错的可能。与logic 类型对应的数据类型是 bit 类型，它们均可用来构建矢量类型（vector)，区别在于：
     * logic 为四值逻辑，即可以表示 0、1、X、Z。
     * bit 为二值逻辑，只可以表示0和1。
-    **通过 logic 和 bit 声明的矢量均为无符号 (unsigned） 变量，例如：**
+**通过 logic 和 bit 声明的矢量均为无符号 (unsigned） 变量，例如：**
 ```systemverilog
 module tb ;
     logic [7:0]  logic_vec = 8'b1000_0000;
@@ -83,6 +80,9 @@ endmodule
 # @1 x_vec = 'b111x
 # @2 b_vec = 'b110
 ```
+
+-----
+
 ## 模块定义与例化
 ### 1.模块定义
 #### Verilog模块定义
@@ -168,8 +168,3 @@ test_v_wai test_inst(
 对于ctrl_reg3的例化和Verilog的例化一致，但是ctrl_reg4的例化需要先把reg2fmt_o和reg2arb_o转化成通用的logic类型，通过**VHDL wrapper**
 
 -----
-
-
-
-
-
