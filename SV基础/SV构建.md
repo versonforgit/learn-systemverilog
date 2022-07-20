@@ -86,20 +86,61 @@ endmodule
 #### Verilog模块定义
 1. 括号外说明
 ```verilog
-module test(clk,rstn,
-            cmd,
-            slv,)
-    input clk,rstn;
-    input [1:0] cmd;
-    output [1:0] slv;
+module test(clk_i,
+            rstn_i,
+            cmd_i,
+            slv0_prio,
+            slv0_len,
+            slv_o);
+    input clk_i,rstn_i;
+    input [1:0] cmd_i;
+    output [1:0] slv0_prio;
+    output [2:0] slv0_len;
+    output [1:0] slv_o;
 endmodule
 ```
 2. 括号内说明
 ```verilog
-module test(input clk,
-            input rstn,
-            input [1:0] cmd,
-            output [1:0] slv);
+module test(input clk_i,
+            input rstn_i,
+            input [1:0] cmd_i,
+            output [1:0] slv0_prio,
+            output [2:0] slv0_len,
+            output [1:0] slv_o);
 endmodule
 ```
-## 
+### VHDL模块定义
+1. 括号内说明
+```vhdl
+entity ctrl_regs3 is
+    port(
+    clk_i       :   in  std_logic;
+    rstn_i      :   in  std_logic;
+    cmd_i       :   in  std_logic_vector(1  downto  0);
+    slv0_prio   :   out std_logic_vector(1  downto  0);
+    slv0_len    :   out std_logic_vector(2  downto  0);
+    slv_o       :   out std_logic
+    );
+end ctrl_regs3;
+```
+2. 分节说明
+```vhdl
+package test_pkg is
+type reg2arb_t is record
+    slv0_prio   :    std_logic_vector(1  downto  0);
+end record;
+type reg2fmt_t is record
+    slv0_len   :    std_logic_vector(2  downto  0);
+end record;
+end  test_pkg;
+entity ctrl_regs4 is
+    port(
+    clk_i       :   in  std_logic;
+    rstn_i      :   in  std_logic;
+    cmd_i       :   in  std_logic_vector(1  downto  0);
+    reg2fmt_o   :   out reg2fmt_t;
+    reg2arb_o   :   out reg2arb_t;
+    slv_o       :   out std_logic
+    );
+end ctrl_regs4;
+```
