@@ -1,4 +1,4 @@
-module test(clk_i,
+module test_v_wai(clk_i,
             rstn_i,
             cmd_i,
             slv0_prio,
